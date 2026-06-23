@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modul Digital Bahasa Indonesia — Karya Tulis Ilmiah</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-50: #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-400: #1D9E75;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --teal-900: #04342C;
+    --amber-50: #FAEEDA;
+    --amber-100: #FAC775;
+    --amber-400: #BA7517;
+    --amber-600: #854F0B;
+    --purple-50: #EEEDFE;
+    --purple-100: #CECBF6;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --coral-50: #FAECE7;
+    --coral-100: #F5C4B3;
+    --coral-400: #D85A30;
+    --coral-600: #993C1D;
+    --blue-50: #E6F1FB;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --gray-50: #F1EFE8;
+    --gray-100: #D3D1C7;
+    --gray-400: #888780;
+    --gray-600: #5F5E5A;
+    --gray-800: #444441;
+    --gray-900: #2C2C2A;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #faf9f6;
+    color: var(--gray-900);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* COVER PAGE */
+  #cover {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--teal-900) 0%, var(--teal-600) 50%, var(--teal-400) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #cover::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 80px solid rgba(255,255,255,0.04);
+    top: -150px; right: -150px;
+  }
+  #cover::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 60px solid rgba(255,255,255,0.04);
+    bottom: -100px; left: -100px;
+  }
+  .cover-badge {
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+    margin-bottom: 2rem;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    max-width: 700px;
+  }
+  .cover-subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.8);
+    max-width: 500px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+  .cover-meta-item {
+    text-align: center;
+  }
+  .cover-meta-item .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--amber-100);
+  }
+  .cover-meta-item .label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .start-btn {
+    background: #fff;
+    color: var(--teal-800);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .start-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.25); }
+
+  /* NAVIGATION */
+  #app { display: none; flex-direction: column; min-height: 100vh; }
+  
+  .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,249,246,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .nav-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--teal-800);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .progress-wrap {
+    flex: 1;
+    height: 4px;
+    background: var(--gray-100);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--teal-400);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .nav-counter {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* SIDEBAR / TOC */
+  .layout {
+    display: flex;
+    flex: 1;
+  }
+  .sidebar {
+    width: 260px;
+    min-width: 260px;
+    background: #fff;
+    border-right: 1px solid rgba(0,0,0,0.06);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 57px;
+    height: calc(100vh - 57px);
+    overflow-y: auto;
+  }
+  .sidebar-heading {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    padding: 0 1.25rem 0.75rem;
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1.25rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .toc-item:hover { background: var(--gray-50); }
+  .toc-item.active {
+    background: var(--teal-50);
+    border-left-color: var(--teal-400);
+  }
+  .toc-item.active .toc-num { background: var(--teal-400); color: #fff; }
+  .toc-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    color: var(--gray-600);
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .toc-text { font-size: 0.82rem; color: var(--gray-800); line-height: 1.3; }
+  .toc-item.active .toc-text { color: var(--teal-800); font-weight: 500; }
+
+  /* CONTENT */
+  .content {
+    flex: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 5rem;
+  }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* CHAPTER HEADER */
+  .chapter-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .chapter-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .chapter-eyebrow.teal { color: var(--teal-600); }
+  .chapter-eyebrow.purple { color: var(--purple-600); }
+  .chapter-eyebrow.coral { color: var(--coral-600); }
+  .chapter-eyebrow.blue { color: var(--blue-600); }
+  .chapter-eyebrow.amber { color: var(--amber-600); }
+  .chapter-eyebrow.green { color: #3B6D11; }
+
+  .chapter-num-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dot-teal { background: var(--teal-400); }
+  .dot-purple { background: var(--purple-400); }
+  .dot-coral { background: var(--coral-400); }
+  .dot-blue { background: var(--blue-400); }
+  .dot-amber { background: var(--amber-400); }
+  .dot-green { background: #639922; }
+
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--gray-900);
+    margin-bottom: 0.75rem;
+  }
+  .chapter-intro {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 600px;
+  }
+
+  /* CONTENT BLOCKS */
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 2.5rem 0 0.75rem;
+  }
+  h3.subsection-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin: 1.75rem 0 0.5rem;
+  }
+  p { margin-bottom: 1rem; font-size: 0.95rem; color: var(--gray-800); }
+
+  /* DEFINITION BOX */
+  .def-box {
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid;
+  }
+  .def-box.teal { background: var(--teal-50); border-color: var(--teal-400); }
+  .def-box.purple { background: var(--purple-50); border-color: var(--purple-400); }
+  .def-box.coral { background: var(--coral-50); border-color: var(--coral-400); }
+  .def-box.blue { background: var(--blue-50); border-color: var(--blue-400); }
+  .def-box.amber { background: var(--amber-50); border-color: var(--amber-400); }
+  .def-box-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .def-box.teal .def-box-label { color: var(--teal-600); }
+  .def-box.purple .def-box-label { color: var(--purple-600); }
+  .def-box.coral .def-box-label { color: var(--coral-600); }
+  .def-box.blue .def-box-label { color: var(--blue-600); }
+  .def-box.amber .def-box-label { color: var(--amber-600); }
+  .def-box p { margin: 0; font-size: 0.92rem; color: var(--gray-800); }
+
+  /* STRUKTUR TABLE */
+  .struktur-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--gray-100);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+  .struktur-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background: #fff;
+  }
+  .struktur-row.header { background: var(--gray-900); }
+  .struktur-cell {
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+    border-right: 1px solid var(--gray-100);
+  }
+  .struktur-row.header .struktur-cell { color: #fff; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.5px; border-right-color: rgba(255,255,255,0.1); }
+  .struktur-cell:last-child { border-right: none; }
+  .struktur-row:nth-child(even) { background: var(--gray-50); }
+
+  /* CARD LIST */
+  .card-list { display: grid; gap: 0.75rem; margin: 1.5rem 0; }
+  .card-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  .card-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    font-style: normal;
+  }
+  .card-icon.teal { background: var(--teal-50); }
+  .card-icon.purple { background: var(--purple-50); }
+  .card-icon.coral { background: var(--coral-50); }
+  .card-icon.blue { background: var(--blue-50); }
+  .card-icon.amber { background: var(--amber-50); }
+  .card-body {}
+  .card-body strong { display: block; font-size: 0.9rem; font-weight: 600; color: var(--gray-900); margin-bottom: 0.2rem; }
+  .card-body span { font-size: 0.85rem; color: var(--gray-600); }
+
+  /* LANGKAH */
+  .step-list { margin: 1.5rem 0; }
+  .step-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-num.teal { background: var(--teal-400); color: #fff; }
+  .step-num.purple { background: var(--purple-400); color: #fff; }
+  .step-num.coral { background: var(--coral-400); color: #fff; }
+  .step-num.blue { background: var(--blue-400); color: #fff; }
+  .step-num.amber { background: var(--amber-400); color: #fff; }
+  .step-num.green { background: #639922; color: #fff; }
+  .step-content strong { font-size: 0.9rem; font-weight: 600; color: var(--gray-900); }
+  .step-content p { margin: 0.2rem 0 0; font-size: 0.88rem; color: var(--gray-600); }
+
+  /* QUOTE */
+  .quote-block {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--gray-600);
+    border-left: 3px solid var(--gray-200);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+  }
+
+  /* HIGHLIGHT PILL */
+  .pill {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin: 2px;
+  }
+  .pill.teal { background: var(--teal-50); color: var(--teal-800); }
+  .pill.purple { background: var(--purple-50); color: var(--purple-800); }
+  .pill.coral { background: var(--coral-50); color: var(--coral-600); }
+  .pill.blue { background: var(--blue-50); color: var(--blue-800); }
+  .pill.amber { background: var(--amber-50); color: var(--amber-600); }
+
+  /* CONTOH BOX */
+  .contoh-box {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .contoh-box-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 0.5rem;
+  }
+  .contoh-box p { margin: 0; font-size: 0.88rem; color: var(--gray-700); font-style: italic; }
+  .contoh-box strong { font-style: normal; color: var(--gray-900); }
+
+  /* NAVIGATION FOOTER */
+  .nav-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    gap: 1rem;
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gray-800);
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .nav-btn:hover { background: var(--gray-50); border-color: var(--gray-400); }
+  .nav-btn.primary {
+    background: var(--teal-400);
+    color: #fff;
+    border-color: var(--teal-400);
+  }
+  .nav-btn.primary:hover { background: var(--teal-600); border-color: var(--teal-600); }
+  .nav-btn:disabled, .nav-btn[disabled] { opacity: 0.35; pointer-events: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .sidebar { display: none; }
+    .content { padding: 1.5rem 1.25rem 4rem; }
+    .cover-meta { gap: 1.25rem; }
+  }
+
+  /* TABLE */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--gray-100);
+  }
+  .styled-table th {
+    background: var(--gray-900);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  .styled-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--gray-800);
+    vertical-align: top;
+  }
+  .styled-table tr:last-child td { border-bottom: none; }
+  .styled-table tr:nth-child(even) td { background: var(--gray-50); }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div id="cover">
+  <div class="cover-badge">Modul Digital Pembelajaran</div>
+  <h1 class="cover-title">Karya Tulis Ilmiah</h1>
+  <p class="cover-subtitle">Laporan Penelitian, Laporan Kegiatan, dan Artikel Ilmiah — Panduan Lengkap untuk Mahasiswa</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><div class="num">6</div><div class="label">Bab Materi</div></div>
+    <div class="cover-meta-item"><div class="num">3</div><div class="label">Jenis Karya</div></div>
+    <div class="cover-meta-item"><div class="num">∞</div><div class="label">Akses Gratis</div></div>
+  </div>
+  <div style="margin-bottom: 2rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 14px; padding: 1.25rem 2rem; text-align: left; max-width: 420px; width: 100%;">
+    <div style="font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.85rem;">Identitas Penyusun</div>
+    <table style="width:100%; border-collapse:collapse; font-size: 0.88rem; color: rgba(255,255,255,0.92);">
+      <tr><td style="padding: 3px 0; color: rgba(255,255,255,0.55); width:110px;">Nama</td><td style="padding: 3px 0; font-weight:500;">Haris Firdaus</td></tr>
+      <tr><td style="padding: 3px 0; color: rgba(255,255,255,0.55);">NIM</td><td style="padding: 3px 0; font-weight:500;">2510312210027</td></tr>
+      <tr><td style="padding: 3px 0; color: rgba(255,255,255,0.55);">Mata Kuliah</td><td style="padding: 3px 0; font-weight:500;">Bahasa Indonesia</td></tr>
+      <tr><td style="padding: 3px 0; color: rgba(255,255,255,0.55);">Dosen</td><td style="padding: 3px 0; font-weight:500;">Aulia Novitasari, M.Pd.</td></tr>
+      <tr><td style="padding: 3px 0; color: rgba(255,255,255,0.55);">Fakultas</td><td style="padding: 3px 0; font-weight:500;">Ekonomi dan Bisnis</td></tr>
+      <tr><td style="padding: 3px 0; color: rgba(255,255,255,0.55);">Universitas</td><td style="padding: 3px 0; font-weight:500;">Universitas Lambung Mangkurat</td></tr>
+    </table>
+  </div>
+  <button class="start-btn" onclick="startModule()">Mulai Belajar →</button>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <nav class="top-nav">
+    <div class="nav-title">Modul KTI</div>
+    <div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:16.6%"></div></div>
+    <div class="nav-counter" id="navCounter">1 / 6</div>
+  </nav>
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-heading">Daftar Isi</div>
+      <div class="toc-item active" onclick="goTo(0)"><div class="toc-num">1</div><div class="toc-text">Mengidentifikasi Laporan Penelitian</div></div>
+      <div class="toc-item" onclick="goTo(1)"><div class="toc-num">2</div><div class="toc-text">Merancang Laporan Penelitian</div></div>
+      <div class="toc-item" onclick="goTo(2)"><div class="toc-num">3</div><div class="toc-text">Mengidentifikasi Laporan Kegiatan</div></div>
+      <div class="toc-item" onclick="goTo(3)"><div class="toc-num">4</div><div class="toc-text">Merancang Laporan Kegiatan</div></div>
+      <div class="toc-item" onclick="goTo(4)"><div class="toc-num">5</div><div class="toc-text">Mengidentifikasi Artikel Ilmiah</div></div>
+      <div class="toc-item" onclick="goTo(5)"><div class="toc-num">6</div><div class="toc-text">Merancang Artikel Ilmiah</div></div>
+    </aside>
+
+    <!-- PAGES -->
+    <main class="content">
+
+      <!-- BAB 1 -->
+      <div class="page active" id="page-0">
+        <div class="chapter-header">
+          <div class="chapter-eyebrow teal"><span class="chapter-num-dot dot-teal"></span>Bab 1 · Laporan Penelitian</div>
+          <h1 class="chapter-title">Mengidentifikasi Laporan Penelitian</h1>
+          <p class="chapter-intro">Laporan penelitian adalah bentuk karya tulis ilmiah yang menyajikan hasil kegiatan penelitian secara sistematis. Memahami ciri dan strukturnya adalah langkah pertama dalam dunia akademik.</p>
+        </div>
+
+        <h2 class="section-title">Pengertian Laporan Penelitian</h2>
+        <p>Laporan penelitian merupakan dokumen ilmiah yang berisi uraian tentang proses dan hasil suatu penelitian. Laporan ini disusun secara sistematis berdasarkan fakta dan data yang diperoleh melalui kegiatan penelitian yang telah dilakukan.</p>
+
+        <div class="def-box teal">
+          <div class="def-box-label">Definisi</div>
+          <p>Laporan penelitian adalah tulisan ilmiah yang memuat rincian lengkap mengenai latar belakang, tujuan, metode, temuan, dan simpulan dari suatu penelitian, disusun menggunakan bahasa formal dan logis.</p>
+        </div>
+
+        <h2 class="section-title">Ciri-Ciri Laporan Penelitian</h2>
+        <p>Untuk dapat mengidentifikasi sebuah laporan penelitian, perlu dipahami ciri-ciri khasnya yang membedakannya dari jenis tulisan lain.</p>
+        <div class="card-list">
+          <div class="card-item">
+            <div class="card-icon teal">🔬</div>
+            <div class="card-body"><strong>Berbasis Data Empiris</strong><span>Setiap pernyataan didukung oleh data yang diperoleh melalui pengamatan, eksperimen, atau survei yang dapat diverifikasi.</span></div>
+          </div>
+          <div class="card-item">
+            <div class="card-icon teal">📐</div>
+            <div class="card-body"><strong>Sistematis dan Terstruktur</strong><span>Disusun mengikuti urutan baku: latar belakang, rumusan masalah, tujuan, tinjauan pustaka, metode, hasil, dan simpulan.</span></div>
+          </div>
+          <div class="card-item">
+            <div class="card-icon teal">🎯</div>
+            <div class="card-body"><strong>Objektif dan Tidak Memihak</strong><span>Penulis menyajikan temuan apa adanya tanpa rekayasa atau pengaruh kepentingan tertentu.</span></div>
+          </div>
+          <div class="card-item">
+            <div class="card-icon teal">📚</div>
+            <div class="card-body"><strong>Menggunakan Referensi Ilmiah</strong><span>Setiap teori atau konsep yang dikutip disertai sumber yang sahih dan dapat dilacak (terverifikasi).</span></div>
+          </div>
+          <div class="card-item">
+            <div class="card-icon teal">✍️</div>
+            <div class="card-body"><strong>Bahasa Formal dan Baku</strong><span>Menggunakan kosakata ilmiah, kalimat efektif, dan tidak menggunakan bahasa sehari-hari atau kiasan.</span></div>
+          </div>
+        </div>
+
+        <h2 class="section-title">Struktur Laporan Penelitian</h2>
+        <p>Laporan penelitian umumnya terdiri dari tiga bagian besar: bagian awal, bagian isi, dan bagian akhir.</p>
+
+        <table class="styled-table">
+          <thead><tr><th>Bagian</th><th>Komponen</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Awal</strong></td><td>Halaman Judul, Abstrak, Kata Pengantar, Daftar Isi</td><td>Memberikan gambaran umum dan orientasi awal kepada pembaca</td></tr>
+            <tr><td><strong>Isi — Bab I</strong></td><td>Pendahuluan</td><td>Latar belakang, rumusan masalah, tujuan, dan manfaat penelitian</td></tr>
+            <tr><td><strong>Isi — Bab II</strong></td><td>Tinjauan Pustaka</td><td>Kajian teori dan penelitian relevan yang menjadi landasan</td></tr>
+            <tr><td><strong>Isi — Bab III</strong></td><td>Metode Penelitian</td><td>Jenis penelitian, teknik pengumpulan data, populasi, sampel</td></tr>
+            <tr><td><strong>Isi — Bab IV</strong></td><td>Hasil dan Pembahasan</td><td>Penyajian data, analisis, dan interpretasi temuan</td></tr>
+            <tr><td><strong>Isi — Bab V</strong></td><td>Penutup</td><td>Simpulan dan saran berdasarkan hasil penelitian</td></tr>
+            <tr><td><strong>Akhir</strong></td><td>Daftar Pustaka, Lampiran</td><td>Sumber referensi dan dokumen pendukung</td></tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-title">Jenis-Jenis Laporan Penelitian</h2>
+        <div class="card-list">
+          <div class="card-item">
+            <div class="card-icon teal">🔭</div>
+            <div class="card-body"><strong>Penelitian Kuantitatif</strong><span>Menggunakan angka dan statistik sebagai data utama, contohnya survei dengan kuesioner terstruktur.</span></div>
+          </div>
+          <div class="card-item">
+            <div class="card-icon teal">🗣️</div>
+            <div class="card-body"><strong>Penelitian Kualitatif</strong><span>Menggunakan data berupa kata, narasi, atau deskripsi yang diperoleh dari wawancara atau observasi mendalam.</span></div>
+          </div>
+          <div class="card-item">
+            <div class="card-icon teal">🔄</div>
+            <div class="card-body"><strong>Penelitian Campuran (Mixed Methods)</strong><span>Menggabungkan pendekatan kuantitatif dan kualitatif untuk menghasilkan pemahaman yang lebih komprehensif.</span></div>
+          </div>
+        </div>
+
+        <h2 class="section-title">Cara Mengidentifikasi Laporan Penelitian</h2>
+        <p>Ketika membaca sebuah dokumen, perhatikan hal-hal berikut untuk memastikan dokumen tersebut adalah laporan penelitian:</p>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num teal">1</div><div class="step-content"><strong>Cek keberadaan abstrak</strong><p>Laporan penelitian selalu memiliki abstrak yang merangkum tujuan, metode, hasil, dan simpulan.</p></div></div>
+          <div class="step-item"><div class="step-num teal">2</div><div class="step-content"><strong>Temukan rumusan masalah</strong><p>Harus ada pernyataan atau pertanyaan jelas yang menjadi fokus penelitian di bagian pendahuluan.</p></div></div>
+          <div class="step-item"><div class="step-num teal">3</div><div class="step-content"><strong>Periksa metode penelitian</strong><p>Ada penjelasan tentang cara pengumpulan dan analisis data yang digunakan peneliti.</p></div></div>
+          <div class="step-item"><div class="step-num teal">4</div><div class="step-content"><strong>Lihat daftar pustaka</strong><p>Laporan penelitian selalu memiliki daftar sumber yang digunakan, biasanya di bagian akhir.</p></div></div>
+          <div class="step-item"><div class="step-num teal">5</div><div class="step-content"><strong>Perhatikan gaya bahasa</strong><p>Bahasa ilmiah, formal, dan impersonal (menggunakan kata "peneliti" bukan "saya").</p></div></div>
+        </div>
+
+        <div class="nav-footer">
+          <button class="nav-btn" disabled>← Sebelumnya</button>
+          <button class="nav-btn primary" onclick="goTo(1)">Bab 2: Merancang →</button>
+        </div>
+      </div>
+
+      <!-- BAB 2 -->
+      <div class="page" id="page-1">
+        <div class="chapter-header">
+          <div class="chapter-eyebrow purple"><span class="chapter-num-dot dot-purple"></span>Bab 2 · Laporan Penelitian</div>
+          <h1 class="chapter-title">Merancang Laporan Penelitian</h1>
+          <p class="chapter-intro">Merancang laporan penelitian memerlukan perencanaan yang matang. Dari menentukan topik hingga menulis draf akhir, setiap tahap memiliki peran penting dalam menghasilkan laporan yang berkualitas.</p>
+        </div>
+
+        <h2 class="section-title">Tahap Perencanaan</h2>
+        <p>Sebelum menulis, peneliti perlu merancang kerangka penelitian secara menyeluruh agar proses penulisan berjalan terarah dan efisien.</p>
+
+        <div class="step-list">
+          <div class="step-item"><div class="step-num purple">1</div><div class="step-content"><strong>Menentukan Topik dan Masalah</strong><p>Pilih topik yang aktual, relevan, dan dapat diteliti. Rumuskan masalah dalam bentuk pertanyaan yang spesifik dan dapat dijawab melalui penelitian.</p></div></div>
+          <div class="step-item"><div class="step-num purple">2</div><div class="step-content"><strong>Menetapkan Tujuan Penelitian</strong><p>Tujuan harus SMART: Spesifik, Measurable (terukur), Achievable (dapat dicapai), Relevant, dan Time-bound.</p></div></div>
+          <div class="step-item"><div class="step-num purple">3</div><div class="step-content"><strong>Memilih Metode yang Tepat</strong><p>Sesuaikan metode dengan jenis data yang dibutuhkan — kuantitatif, kualitatif, atau campuran.</p></div></div>
+          <div class="step-item"><div class="step-num purple">4</div><div class="step-content"><strong>Mengumpulkan Data</strong><p>Laksanakan pengumpulan data sesuai instrumen yang telah disiapkan: kuesioner, pedoman wawancara, atau lembar observasi.</p></div></div>
+          <div class="step-item"><div class="step-num purple">5</div><div class="step-content"><strong>Menganalisis dan Menginterpretasi Data</strong><p>Olah data yang terkumpul menggunakan teknik analisis yang sesuai, kemudian interpretasikan hasilnya secara kritis.</p></div></div>
+          <div class="step-item"><div class="step-num purple">6</div><div class="step-content"><strong>Menulis Laporan</strong><p>Susun laporan mengikuti struktur baku dengan bahasa yang formal, jelas, dan terukur.</p></div></div>
+        </div>
+
+        <h2 class="section-title">Menulis Bagian Pendahuluan</h2>
+        <p>Pendahuluan adalah bagian yang pertama kali dibaca dan harus mampu meyakinkan pembaca tentang pentingnya penelitian yang dilakukan.</p>
+        <div class="def-box purple">
+          <div class="def-box-label">Komponen Pendahuluan</div>
+          <p><strong>Latar Belakang</strong> — uraikan fenomena, kesenjangan, atau permasalahan yang melatarbelakangi penelitian. <strong>Rumusan Masalah</strong> — pertanyaan spesifik yang akan dijawab. <strong>Tujuan</strong> — apa yang ingin dicapai. <strong>Manfaat</strong> — kontribusi bagi ilmu pengetahuan, masyarakat, atau kebijakan.</p>
+        </div>
+
+        <h2 class="section-title">Menulis Tinjauan Pustaka</h2>
+        <p>Tinjauan pustaka bukan sekadar daftar bacaan, melainkan kajian kritis atas teori dan penelitian terdahulu yang relevan dengan topik penelitian.</p>
+        <div class="card-list">
+          <div class="card-item"><div class="card-icon purple">📖</div><div class="card-body"><strong>Kajian Teori</strong><span>Uraikan teori-teori utama yang menjadi landasan konseptual penelitian Anda.</span></div></div>
+          <div class="card-item"><div class="card-icon purple">🔍</div><div class="card-body"><strong>Penelitian Relevan</strong><span>Bahas penelitian sebelumnya yang serupa, persamaan, dan perbedaannya dengan penelitian Anda.</span></div></div>
+          <div class="card-item"><div class="card-icon purple">🧩</div><div class="card-body"><strong>Kerangka Berpikir</strong><span>Susun kerangka berpikir yang menggambarkan hubungan antar variabel atau konsep dalam penelitian.</span></div></div>
+        </div>
+
+        <h2 class="section-title">Teknik Penulisan yang Baik</h2>
+        <div class="contoh-box">
+          <div class="contoh-box-label">Contoh — Kalimat Efektif dalam Laporan</div>
+          <p><strong>Kurang baik:</strong> "Penelitian ini dilakukan karena menurut saya banyak orang yang tidak tahu tentang hal ini."<br><br><strong>Lebih baik:</strong> "Penelitian ini dilakukan untuk mengidentifikasi tingkat pemahaman mahasiswa terhadap penggunaan media sosial dalam pembelajaran daring berdasarkan data empiris."</p>
+        </div>
+
+        <h2 class="section-title">Menulis Abstrak yang Efektif</h2>
+        <p>Abstrak adalah ringkasan mandiri dari seluruh laporan. Meskipun ditulis terakhir, ia ditempatkan di awal laporan.</p>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num purple">1</div><div class="step-content"><strong>Latar belakang singkat</strong><p>Satu atau dua kalimat yang menjelaskan konteks penelitian.</p></div></div>
+          <div class="step-item"><div class="step-num purple">2</div><div class="step-content"><strong>Tujuan penelitian</strong><p>Pernyataan jelas tentang apa yang ingin dicapai.</p></div></div>
+          <div class="step-item"><div class="step-num purple">3</div><div class="step-content"><strong>Metode yang digunakan</strong><p>Jenis penelitian, teknik pengumpulan data, dan jumlah sampel.</p></div></div>
+          <div class="step-item"><div class="step-num purple">4</div><div class="step-content"><strong>Hasil utama</strong><p>Temuan paling penting dari penelitian.</p></div></div>
+          <div class="step-item"><div class="step-num purple">5</div><div class="step-content"><strong>Simpulan dan implikasi</strong><p>Jawaban atas rumusan masalah dan rekomendasi singkat.</p></div></div>
+        </div>
+
+        <div class="def-box purple">
+          <div class="def-box-label">Panjang Abstrak yang Ideal</div>
+          <p>Abstrak umumnya ditulis dalam satu paragraf dengan panjang antara <strong>150–250 kata</strong>. Tidak menggunakan kutipan, tabel, atau singkatan yang tidak dijelaskan. Disertai 3–5 kata kunci di bawahnya.</p>
+        </div>
+
+        <div class="nav-footer">
+          <button class="nav-btn" onclick="goTo(0)">← Bab 1</button>
+          <button class="nav-btn primary" onclick="goTo(2)">Bab 3: Laporan Kegiatan →</button>
+        </div>
+      </div>
+
+      <!-- BAB 3 -->
+      <div class="page" id="page-2">
+        <div class="chapter-header">
+          <div class="chapter-eyebrow coral"><span class="chapter-num-dot dot-coral"></span>Bab 3 · Laporan Kegiatan</div>
+          <h1 class="chapter-title">Mengidentifikasi Laporan Kegiatan</h1>
+          <p class="chapter-intro">Laporan kegiatan adalah dokumen resmi yang merekam pelaksanaan suatu kegiatan. Berbeda dengan laporan penelitian, laporan kegiatan berfokus pada dokumentasi proses dan capaian suatu program atau acara.</p>
+        </div>
+
+        <h2 class="section-title">Pengertian Laporan Kegiatan</h2>
+        <p>Laporan kegiatan adalah tulisan yang memaparkan pelaksanaan suatu kegiatan secara runtut dan lengkap, mulai dari perencanaan, pelaksanaan, hingga evaluasi. Laporan ini berfungsi sebagai pertanggungjawaban kepada pihak yang berwenang atau yang mendanai kegiatan tersebut.</p>
+
+        <div class="def-box coral">
+          <div class="def-box-label">Definisi</div>
+          <p>Laporan kegiatan adalah dokumen formal yang menggambarkan secara sistematis tentang suatu kegiatan yang telah dilaksanakan, mencakup tujuan, proses pelaksanaan, hasil, dan evaluasi kegiatan tersebut.</p>
+        </div>
+
+        <h2 class="section-title">Perbedaan Laporan Kegiatan dan Laporan Penelitian</h2>
+        <table class="styled-table">
+          <thead><tr><th>Aspek</th><th>Laporan Kegiatan</th><th>Laporan Penelitian</th></tr></thead>
+          <tbody>
+            <tr><td>Fokus</td><td>Dokumentasi pelaksanaan kegiatan</td><td>Temuan ilmiah dari penelitian</td></tr>
+            <tr><td>Tujuan</td><td>Pertanggungjawaban kepada penyelenggara/donatur</td><td>Pengembangan ilmu pengetahuan</td></tr>
+            <tr><td>Data</td><td>Fakta kegiatan, foto, absensi, anggaran</td><td>Data empiris dari eksperimen/survei</td></tr>
+            <tr><td>Metode</td><td>Tidak ada bab metode penelitian</td><td>Memiliki bab metode yang rinci</td></tr>
+            <tr><td>Referensi</td><td>Tidak diwajibkan</td><td>Wajib ada daftar pustaka</td></tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-title">Ciri-Ciri Laporan Kegiatan</h2>
+        <div class="card-list">
+          <div class="card-item"><div class="card-icon coral">📅</div><div class="card-body"><strong>Memuat Informasi Waktu dan Tempat</strong><span>Laporan kegiatan selalu mencantumkan tanggal, waktu, dan lokasi pelaksanaan kegiatan secara spesifik.</span></div></div>
+          <div class="card-item"><div class="card-icon coral">👥</div><div class="card-body"><strong>Mencantumkan Peserta/Pelaksana</strong><span>Memuat informasi mengenai siapa yang terlibat dalam kegiatan, baik sebagai penyelenggara maupun peserta.</span></div></div>
+          <div class="card-item"><div class="card-icon coral">💰</div><div class="card-body"><strong>Laporan Keuangan/Anggaran</strong><span>Biasanya disertai rincian penggunaan dana yang mencakup pemasukan, pengeluaran, dan sisa anggaran.</span></div></div>
+          <div class="card-item"><div class="card-icon coral">📸</div><div class="card-body"><strong>Dokumentasi Visual</strong><span>Dilengkapi dengan foto, video, atau dokumen pendukung sebagai bukti pelaksanaan kegiatan.</span></div></div>
+          <div class="card-item"><div class="card-icon coral">✅</div><div class="card-body"><strong>Evaluasi dan Rekomendasi</strong><span>Memuat penilaian atas keberhasilan kegiatan dan saran untuk pelaksanaan ke depannya.</span></div></div>
+        </div>
+
+        <h2 class="section-title">Struktur Laporan Kegiatan</h2>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num coral">1</div><div class="step-content"><strong>Halaman Judul</strong><p>Nama kegiatan, penyelenggara, tanggal, dan logo instansi.</p></div></div>
+          <div class="step-item"><div class="step-num coral">2</div><div class="step-content"><strong>Kata Pengantar</strong><p>Ucapan syukur dan terima kasih dari penyelenggara.</p></div></div>
+          <div class="step-item"><div class="step-num coral">3</div><div class="step-content"><strong>Pendahuluan</strong><p>Latar belakang kegiatan, tujuan, dan manfaat yang diharapkan.</p></div></div>
+          <div class="step-item"><div class="step-num coral">4</div><div class="step-content"><strong>Pelaksanaan Kegiatan</strong><p>Waktu, tempat, susunan acara, dan rincian pelaksanaan setiap sesi kegiatan.</p></div></div>
+          <div class="step-item"><div class="step-num coral">5</div><div class="step-content"><strong>Hasil Kegiatan</strong><p>Capaian yang diperoleh dari kegiatan dibandingkan dengan tujuan awal.</p></div></div>
+          <div class="step-item"><div class="step-num coral">6</div><div class="step-content"><strong>Evaluasi</strong><p>Penilaian terhadap kekurangan dan kelebihan pelaksanaan kegiatan.</p></div></div>
+          <div class="step-item"><div class="step-num coral">7</div><div class="step-content"><strong>Penutup dan Lampiran</strong><p>Simpulan, saran, daftar hadir, foto dokumentasi, dan laporan keuangan.</p></div></div>
+        </div>
+
+        <h2 class="section-title">Jenis-Jenis Laporan Kegiatan</h2>
+        <div class="card-list">
+          <div class="card-item"><div class="card-icon coral">🎓</div><div class="card-body"><strong>Laporan Kegiatan Akademik</strong><span>Seminar, lokakarya, kuliah umum, magang, KKN (Kuliah Kerja Nyata).</span></div></div>
+          <div class="card-item"><div class="card-icon coral">🏢</div><div class="card-body"><strong>Laporan Kegiatan Organisasi</strong><span>Program kerja himpunan, kegiatan BEM, kepanitiaan acara kampus.</span></div></div>
+          <div class="card-item"><div class="card-icon coral">🌍</div><div class="card-body"><strong>Laporan Kegiatan Pengabdian Masyarakat</strong><span>Penyuluhan, bakti sosial, pelatihan bagi masyarakat.</span></div></div>
+        </div>
+
+        <div class="nav-footer">
+          <button class="nav-btn" onclick="goTo(1)">← Bab 2</button>
+          <button class="nav-btn primary" onclick="goTo(3)">Bab 4: Merancang →</button>
+        </div>
+      </div>
+
+      <!-- BAB 4 -->
+      <div class="page" id="page-3">
+        <div class="chapter-header">
+          <div class="chapter-eyebrow blue"><span class="chapter-num-dot dot-blue"></span>Bab 4 · Laporan Kegiatan</div>
+          <h1 class="chapter-title">Merancang Laporan Kegiatan</h1>
+          <p class="chapter-intro">Merancang laporan kegiatan yang baik memerlukan kepekaan terhadap detail, ketepatan data, dan kemampuan menyajikan informasi secara menarik namun tetap formal dan akuntabel.</p>
+        </div>
+
+        <h2 class="section-title">Prinsip Penulisan Laporan Kegiatan</h2>
+        <div class="card-list">
+          <div class="card-item"><div class="card-icon blue">🎯</div><div class="card-body"><strong>Akurat</strong><span>Seluruh data — termasuk tanggal, jumlah peserta, dan anggaran — harus benar-benar sesuai dengan fakta pelaksanaan kegiatan.</span></div></div>
+          <div class="card-item"><div class="card-icon blue">📋</div><div class="card-body"><strong>Lengkap</strong><span>Tidak ada informasi penting yang dihilangkan. Setiap sesi dan aktivitas utama harus terdokumentasi dengan baik.</span></div></div>
+          <div class="card-item"><div class="card-icon blue">🔍</div><div class="card-body"><strong>Jelas</strong><span>Penggunaan bahasa yang lugas dan tidak ambigu sehingga mudah dipahami oleh berbagai pihak yang membaca.</span></div></div>
+          <div class="card-item"><div class="card-icon blue">⏱️</div><div class="card-body"><strong>Tepat Waktu</strong><span>Laporan harus diselesaikan dan diserahkan dalam batas waktu yang telah ditentukan oleh penyelenggara atau pihak yang berkepentingan.</span></div></div>
+        </div>
+
+        <h2 class="section-title">Langkah Merancang Laporan Kegiatan</h2>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num blue">1</div><div class="step-content"><strong>Kumpulkan Semua Data Kegiatan</strong><p>Himpun seluruh dokumen: absensi, susunan acara, foto, bukti pengeluaran, dan catatan selama kegiatan berlangsung.</p></div></div>
+          <div class="step-item"><div class="step-num blue">2</div><div class="step-content"><strong>Buat Kerangka Laporan</strong><p>Susun outline berdasarkan struktur standar laporan kegiatan sebelum mulai menulis isi.</p></div></div>
+          <div class="step-item"><div class="step-num blue">3</div><div class="step-content"><strong>Tulis Bagian Pendahuluan</strong><p>Uraikan latar belakang kegiatan, mengapa kegiatan ini penting dan perlu dilakukan.</p></div></div>
+          <div class="step-item"><div class="step-num blue">4</div><div class="step-content"><strong>Deskripsikan Pelaksanaan</strong><p>Jelaskan secara runtut setiap tahap kegiatan, dari pembukaan, kegiatan inti, hingga penutupan.</p></div></div>
+          <div class="step-item"><div class="step-num blue">5</div><div class="step-content"><strong>Susun Laporan Keuangan</strong><p>Buat tabel yang menunjukkan rencana anggaran vs. realisasi anggaran secara transparan.</p></div></div>
+          <div class="step-item"><div class="step-num blue">6</div><div class="step-content"><strong>Tulis Evaluasi dan Penutup</strong><p>Nilai ketercapaian tujuan, hambatan yang ditemui, dan rekomendasi untuk perbaikan ke depan.</p></div></div>
+          <div class="step-item"><div class="step-num blue">7</div><div class="step-content"><strong>Lampirkan Dokumen Pendukung</strong><p>Sertakan foto, daftar hadir, dan dokumen pendukung lainnya sebagai bukti otentik.</p></div></div>
+        </div>
+
+        <h2 class="section-title">Format Laporan Keuangan Kegiatan</h2>
+        <table class="styled-table">
+          <thead><tr><th>No</th><th>Uraian</th><th>Anggaran (Rp)</th><th>Realisasi (Rp)</th><th>Selisih (Rp)</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Konsumsi peserta</td><td>500.000</td><td>485.000</td><td>+15.000</td></tr>
+            <tr><td>2</td><td>Perlengkapan acara</td><td>300.000</td><td>310.000</td><td>-10.000</td></tr>
+            <tr><td>3</td><td>Dokumentasi</td><td>200.000</td><td>200.000</td><td>0</td></tr>
+            <tr><td colspan="2"><strong>Total</strong></td><td><strong>1.000.000</strong></td><td><strong>995.000</strong></td><td><strong>+5.000</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-title">Tips Menulis Evaluasi yang Kritis</h2>
+        <div class="def-box blue">
+          <div class="def-box-label">Panduan Evaluasi</div>
+          <p>Evaluasi yang baik tidak hanya memuji keberhasilan, tetapi juga mengidentifikasi kelemahan secara jujur. Gunakan pendekatan <strong>SWOT</strong>: Strengths (kekuatan), Weaknesses (kelemahan), Opportunities (peluang), dan Threats (ancaman) untuk analisis yang komprehensif.</p>
+        </div>
+
+        <div class="contoh-box">
+          <div class="contoh-box-label">Contoh Kalimat Evaluasi</div>
+          <p>"Kegiatan seminar berlangsung sesuai jadwal yang direncanakan. Namun, jumlah peserta yang hadir <strong>(87 dari 120 yang didaftarkan)</strong> menunjukkan perlunya strategi promosi yang lebih intensif pada penyelenggaraan berikutnya."</p>
+        </div>
+
+        <div class="nav-footer">
+          <button class="nav-btn" onclick="goTo(2)">← Bab 3</button>
+          <button class="nav-btn primary" onclick="goTo(4)">Bab 5: Artikel Ilmiah →</button>
+        </div>
+      </div>
+
+      <!-- BAB 5 -->
+      <div class="page" id="page-4">
+        <div class="chapter-header">
+          <div class="chapter-eyebrow amber"><span class="chapter-num-dot dot-amber"></span>Bab 5 · Artikel Ilmiah</div>
+          <h1 class="chapter-title">Mengidentifikasi Artikel Ilmiah</h1>
+          <p class="chapter-intro">Artikel ilmiah adalah karya tulis yang menyampaikan gagasan, temuan, atau analisis secara ilmiah, ditujukan untuk komunitas akademik, dan dipublikasikan melalui jurnal atau prosiding ilmiah.</p>
+        </div>
+
+        <h2 class="section-title">Pengertian Artikel Ilmiah</h2>
+        <p>Artikel ilmiah adalah karya tulis yang memenuhi kaidah ilmiah: bersifat objektif, menggunakan metodologi yang tepat, dapat direplikasi, dan melalui proses penelaahan oleh sejawat (peer review). Artikel ilmiah merupakan sarana utama penyebaran temuan ilmiah kepada komunitas akademik global.</p>
+
+        <div class="def-box amber">
+          <div class="def-box-label">Definisi</div>
+          <p>Artikel ilmiah adalah tulisan yang membahas suatu masalah secara ilmiah, berdasarkan fakta dan teori yang dapat dipertanggungjawabkan, dan dipublikasikan dalam media ilmiah yang terakreditasi atau memiliki ISSN.</p>
+        </div>
+
+        <h2 class="section-title">Jenis-Jenis Artikel Ilmiah</h2>
+        <div class="card-list">
+          <div class="card-item"><div class="card-icon amber">🔬</div><div class="card-body"><strong>Artikel Penelitian (Research Article)</strong><span>Melaporkan hasil penelitian orisinal yang belum pernah dipublikasikan sebelumnya. Ini adalah jenis yang paling umum dan paling bernilai dalam dunia akademik.</span></div></div>
+          <div class="card-item"><div class="card-icon amber">📚</div><div class="card-body"><strong>Artikel Tinjauan (Review Article)</strong><span>Merangkum dan mengevaluasi penelitian-penelitian yang sudah ada mengenai suatu topik tertentu secara sistematis.</span></div></div>
+          <div class="card-item"><div class="card-icon amber">💡</div><div class="card-body"><strong>Artikel Konseptual</strong><span>Membahas gagasan atau konsep baru tanpa data empiris. Mengandalkan argumentasi logis dan kajian literatur yang mendalam.</span></div></div>
+          <div class="card-item"><div class="card-icon amber">📝</div><div class="card-body"><strong>Makalah Prosiding</strong><span>Artikel yang dipresentasikan dalam konferensi atau seminar ilmiah dan diterbitkan dalam buku prosiding.</span></div></div>
+        </div>
+
+        <h2 class="section-title">Struktur Artikel Ilmiah (Format IMRAD)</h2>
+        <p>Artikel ilmiah penelitian umumnya menggunakan format IMRAD yang merupakan singkatan dari:</p>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num amber">I</div><div class="step-content"><strong>Introduction (Pendahuluan)</strong><p>Memaparkan latar belakang masalah, tinjauan pustaka singkat, dan tujuan penelitian.</p></div></div>
+          <div class="step-item"><div class="step-num amber">M</div><div class="step-content"><strong>Methods (Metode)</strong><p>Menjelaskan desain penelitian, prosedur pengumpulan data, dan teknik analisis yang digunakan.</p></div></div>
+          <div class="step-item"><div class="step-num amber">R</div><div class="step-content"><strong>Results (Hasil)</strong><p>Menyajikan temuan penelitian secara objektif, biasanya disertai tabel, grafik, atau gambar.</p></div></div>
+          <div class="step-item"><div class="step-num amber">A</div><div class="step-content"><strong>And</strong><p>(penghubung)</p></div></div>
+          <div class="step-item"><div class="step-num amber">D</div><div class="step-content"><strong>Discussion (Pembahasan)</strong><p>Menginterpretasikan hasil, menghubungkan dengan teori/penelitian sebelumnya, mengakui keterbatasan, dan memberikan implikasi.</p></div></div>
+        </div>
+
+        <h2 class="section-title">Ciri-Ciri Artikel Ilmiah</h2>
+        <table class="styled-table">
+          <thead><tr><th>Ciri</th><th>Penjelasan</th></tr></thead>
+          <tbody>
+            <tr><td>Orisinalitas</td><td>Berisi gagasan atau temuan baru yang memberikan kontribusi bagi keilmuan</td></tr>
+            <tr><td>Ketepatan</td><td>Menggunakan istilah ilmiah yang tepat dan konsisten sepanjang artikel</td></tr>
+            <tr><td>Kredibilitas</td><td>Setiap klaim didukung oleh bukti atau referensi yang sahih dan dapat diverifikasi</td></tr>
+            <tr><td>Kejelasan</td><td>Ditulis dengan bahasa yang jelas, ringkas, dan tidak bertele-tele</td></tr>
+            <tr><td>Peer Review</td><td>Telah melalui proses penelaahan oleh pakar di bidang yang sama</td></tr>
+            <tr><td>Format Baku</td><td>Mengikuti gaya selingkung (style guide) jurnal tempat artikel diterbitkan</td></tr>
+          </tbody>
+        </table>
+
+        <h2 class="section-title">Cara Mengidentifikasi Artikel Ilmiah</h2>
+        <div class="card-list">
+          <div class="card-item"><div class="card-icon amber">🏷️</div><div class="card-body"><strong>Periksa Sumber Publikasi</strong><span>Artikel ilmiah diterbitkan di jurnal bereputasi, prosiding konferensi, atau repository akademik seperti Google Scholar, DOAJ, atau Sinta.</span></div></div>
+          <div class="card-item"><div class="card-icon amber">👨‍🔬</div><div class="card-body"><strong>Cek Informasi Penulis</strong><span>Artikel ilmiah mencantumkan nama penulis, afiliasi lembaga, dan alamat email korespondensi secara jelas.</span></div></div>
+          <div class="card-item"><div class="card-icon amber">📋</div><div class="card-body"><strong>Temukan Abstrak dan Kata Kunci</strong><span>Selalu ada abstrak berstruktur dan kata kunci (keywords) di bagian awal artikel.</span></div></div>
+          <div class="card-item"><div class="card-icon amber">🔢</div><div class="card-body"><strong>Lihat Daftar Referensi</strong><span>Daftar pustaka yang panjang dan terformat sesuai gaya ilmiah (APA, MLA, Chicago, dll.) adalah penanda kuat artikel ilmiah.</span></div></div>
+        </div>
+
+        <div class="nav-footer">
+          <button class="nav-btn" onclick="goTo(3)">← Bab 4</button>
+          <button class="nav-btn primary" onclick="goTo(5)">Bab 6: Merancang →</button>
+        </div>
+      </div>
+
+      <!-- BAB 6 -->
+      <div class="page" id="page-5">
+        <div class="chapter-header">
+          <div class="chapter-eyebrow green"><span class="chapter-num-dot dot-green"></span>Bab 6 · Artikel Ilmiah</div>
+          <h1 class="chapter-title">Merancang Artikel Ilmiah</h1>
+          <p class="chapter-intro">Menulis artikel ilmiah adalah keterampilan yang dapat dipelajari dan diasah. Dengan memahami proses dan teknik yang tepat, setiap mahasiswa dapat menghasilkan artikel yang layak dipublikasikan.</p>
+        </div>
+
+        <h2 class="section-title">Tahap Pra-Penulisan</h2>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num green">1</div><div class="step-content"><strong>Tentukan Topik yang Spesifik</strong><p>Topik yang terlalu luas sulit ditangani dalam satu artikel. Sempitkan fokus hingga dapat dibahas secara mendalam dalam batas kata yang ditentukan jurnal.</p></div></div>
+          <div class="step-item"><div class="step-num green">2</div><div class="step-content"><strong>Lakukan Studi Literatur</strong><p>Telusuri artikel-artikel terkait di Google Scholar, Scopus, atau Web of Science untuk memetakan posisi penelitian Anda dalam khazanah keilmuan.</p></div></div>
+          <div class="step-item"><div class="step-num green">3</div><div class="step-content"><strong>Pilih Jurnal yang Tepat</strong><p>Sesuaikan jurnal dengan bidang, cakupan, dan tingkat akreditasi yang Anda tuju. Baca panduan penulisan (author guidelines) jurnal tersebut.</p></div></div>
+          <div class="step-item"><div class="step-num green">4</div><div class="step-content"><strong>Buat Outline yang Kuat</strong><p>Susun kerangka artikel yang mengalir logis dari satu bagian ke bagian berikutnya sebelum mulai menulis.</p></div></div>
+        </div>
+
+        <h2 class="section-title">Menulis Setiap Bagian Artikel</h2>
+
+        <h3 class="subsection-title">Judul</h3>
+        <p>Judul artikel harus informatif, spesifik, dan menarik. Hindari judul yang terlalu panjang atau terlalu umum.</p>
+        <div class="contoh-box">
+          <div class="contoh-box-label">Contoh Judul</div>
+          <p><strong>Kurang baik:</strong> "Penelitian tentang Media Sosial"<br><br><strong>Baik:</strong> "Pengaruh Penggunaan Instagram terhadap Motivasi Belajar Mahasiswa: Studi Kasus di Universitas XYZ Tahun 2024"</p>
+        </div>
+
+        <h3 class="subsection-title">Abstrak</h3>
+        <div class="def-box amber">
+          <div class="def-box-label">Komponen Abstrak Artikel Ilmiah</div>
+          <p>Abstrak artikel ilmiah umumnya 150–250 kata dan memuat: <strong>(1)</strong> konteks/latar belakang, <strong>(2)</strong> tujuan artikel, <strong>(3)</strong> metode yang digunakan, <strong>(4)</strong> hasil utama, dan <strong>(5)</strong> simpulan/implikasi. Diikuti dengan 3–5 kata kunci.</p>
+        </div>
+
+        <h3 class="subsection-title">Pendahuluan</h3>
+        <p>Pendahuluan yang baik membangun argumen mengapa penelitian ini penting. Gunakan pendekatan "funnel" — mulai dari yang umum, perlahan-lahan menyempit ke permasalahan spesifik yang Anda teliti.</p>
+
+        <h3 class="subsection-title">Metode</h3>
+        <p>Bagian metode harus cukup rinci sehingga pembaca dapat mereplikasi penelitian Anda. Sebutkan: desain penelitian, subjek/sampel, instrumen, prosedur, dan teknik analisis data.</p>
+
+        <h3 class="subsection-title">Hasil dan Pembahasan</h3>
+        <div class="card-list">
+          <div class="card-item"><div class="card-icon amber">📊</div><div class="card-body"><strong>Sajikan Data Secara Jelas</strong><span>Gunakan tabel, grafik, atau diagram untuk mempermudah pemahaman. Setiap tabel/gambar harus memiliki nomor dan keterangan yang jelas.</span></div></div>
+          <div class="card-item"><div class="card-icon amber">🔗</div><div class="card-body"><strong>Hubungkan dengan Literatur</strong><span>Dalam pembahasan, bandingkan hasil Anda dengan temuan penelitian sebelumnya — apakah sejalan atau bertentangan, dan jelaskan mengapa.</span></div></div>
+          <div class="card-item"><div class="card-icon amber">⚠️</div><div class="card-body"><strong>Akui Keterbatasan</strong><span>Penelitian yang jujur mengakui keterbatasannya. Ini justru menunjukkan kematangan ilmiah penulis, bukan kelemahan.</span></div></div>
+        </div>
+
+        <h3 class="subsection-title">Simpulan</h3>
+        <p>Simpulan menjawab rumusan masalah dan tujuan penelitian secara ringkas. Jangan menyajikan data baru di bagian simpulan. Akhiri dengan implikasi praktis atau rekomendasi untuk penelitian selanjutnya.</p>
+
+        <h2 class="section-title">Gaya Penulisan Ilmiah</h2>
+        <div class="card-list">
+          <div class="card-item"><div class="card-icon amber">✏️</div><div class="card-body"><strong>Gunakan Kalimat Aktif</strong><span>Kalimat aktif lebih langsung dan kuat. "Peneliti menganalisis data..." lebih baik daripada "Data dianalisis oleh peneliti..."</span></div></div>
+          <div class="card-item"><div class="card-icon amber">🎯</div><div class="card-body"><strong>Presisi dalam Pilihan Kata</strong><span>Gunakan kata yang paling tepat untuk menggambarkan apa yang Anda maksud. Hindari penggunaan kata yang bermakna ganda atau ambigu.</span></div></div>
+          <div class="card-item"><div class="card-icon amber">📏</div><div class="card-body"><strong>Kalimat dan Paragraf yang Proporsional</strong><span>Satu paragraf = satu gagasan utama. Idealnya 4–6 kalimat per paragraf untuk keterbacaan yang optimal.</span></div></div>
+        </div>
+
+        <h2 class="section-title">Sistem Rujukan dan Sitasi</h2>
+        <table class="styled-table">
+          <thead><tr><th>Gaya</th><th>Contoh Dalam Teks</th><th>Bidang Umum</th></tr></thead>
+          <tbody>
+            <tr><td><strong>APA</strong></td><td>(Suryani, 2023, hlm. 45)</td><td>Pendidikan, Psikologi, Sosial</td></tr>
+            <tr><td><strong>MLA</strong></td><td>(Suryani 45)</td><td>Sastra, Humaniora</td></tr>
+            <tr><td><strong>Chicago</strong></td><td>Catatan kaki / Daftar pustaka</td><td>Sejarah, Seni</td></tr>
+            <tr><td><strong>Vancouver</strong></td><td>[1] atau superscript</td><td>Kedokteran, Kesehatan</td></tr>
+          </tbody>
+        </table>
+
+        <div class="def-box amber">
+          <div class="def-box-label">Penting — Hindari Plagiarisme</div>
+          <p>Setiap ide, data, atau kalimat yang bukan berasal dari pemikiran sendiri harus disertai sitasi yang tepat. Gunakan perangkat seperti Turnitin atau iThenticate untuk memeriksa tingkat kemiripan teks sebelum mengirim artikel ke jurnal. Plagiarisme adalah pelanggaran etika akademik yang serius.</p>
+        </div>
+
+        <h2 class="section-title">Proses Pengiriman dan Peer Review</h2>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num green">1</div><div class="step-content"><strong>Pilih Jurnal yang Sesuai</strong><p>Pastikan ruang lingkup topik artikel sesuai dengan fokus jurnal yang dituju.</p></div></div>
+          <div class="step-item"><div class="step-num green">2</div><div class="step-content"><strong>Ikuti Panduan Penulisan</strong><p>Sesuaikan format, panjang artikel, dan gaya sitasi dengan persyaratan jurnal secara cermat.</p></div></div>
+          <div class="step-item"><div class="step-num green">3</div><div class="step-content"><strong>Kirim Melalui Sistem OJS</strong><p>Sebagian besar jurnal menggunakan Open Journal System (OJS) untuk mengelola proses pengiriman artikel.</p></div></div>
+          <div class="step-item"><div class="step-num green">4</div><div class="step-content"><strong>Tunggu dan Tanggapi Ulasan</strong><p>Proses peer review bisa berlangsung beberapa minggu hingga bulan. Tanggapi catatan reviewer dengan teliti dan profesional.</p></div></div>
+          <div class="step-item"><div class="step-num green">5</div><div class="step-content"><strong>Revisi dan Publikasi</strong><p>Setelah diterima, lakukan revisi akhir sesuai permintaan editor hingga artikel siap diterbitkan.</p></div></div>
+        </div>
+
+        <div class="def-box amber">
+          <div class="def-box-label">Penutup Modul</div>
+          <p>Selamat! Anda telah menyelesaikan seluruh materi modul ini. Pemahaman tentang laporan penelitian, laporan kegiatan, dan artikel ilmiah adalah bekal penting dalam perjalanan akademik Anda. Teruslah berlatih menulis dan jangan ragu untuk berkonsultasi dengan dosen pembimbing. <strong>Semangat berkarya!</strong></p>
+        </div>
+
+        <div class="nav-footer">
+          <button class="nav-btn" onclick="goTo(4)">← Bab 5</button>
+          <button class="nav-btn primary" onclick="backToCover()">🏠 Kembali ke Awal</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  let current = 0;
+  const total = 6;
+  const colors = ['teal','purple','coral','blue','amber','green'];
+  const titles = [
+    'Mengidentifikasi Laporan Penelitian',
+    'Merancang Laporan Penelitian',
+    'Mengidentifikasi Laporan Kegiatan',
+    'Merancang Laporan Kegiatan',
+    'Mengidentifikasi Artikel Ilmiah',
+    'Merancang Artikel Ilmiah'
+  ];
+
+  function startModule() {
+    document.getElementById('cover').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    window.scrollTo(0, 0);
+  }
+
+  function backToCover() {
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('cover').style.display = 'flex';
+    goTo(0, true);
+    window.scrollTo(0, 0);
+  }
+
+  function goTo(n, silent) {
+    document.querySelectorAll('.page').forEach((p, i) => {
+      p.classList.toggle('active', i === n);
+    });
+    document.querySelectorAll('.toc-item').forEach((t, i) => {
+      t.classList.toggle('active', i === n);
+    });
+    current = n;
+    const pct = ((n + 1) / total * 100).toFixed(1);
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('navCounter').textContent = (n + 1) + ' / ' + total;
+    document.querySelector('.nav-title').textContent = 'Bab ' + (n+1) + ': ' + titles[n];
+    if (!silent) window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
